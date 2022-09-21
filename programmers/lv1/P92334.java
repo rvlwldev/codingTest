@@ -7,8 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 class Solution {
-    
+
     public int[] solution(String[] id_list, String[] reportDup, int k) {
+        
         int[] answer = new int[id_list.length];
         Arrays.fill(answer, 0);
 
