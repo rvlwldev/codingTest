@@ -1,6 +1,6 @@
 package programmers.lv1;
 
-class Solution {
+class Solution72410 {
     public String solution(String new_id) {
 
         String answer = "";
@@ -46,7 +46,7 @@ class Solution {
 public class P72410 {
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
+        Solution72410 solution = new Solution72410();
 
         String answer = solution.solution("...!@BaT#*..y.abcdefghijklm");
 
