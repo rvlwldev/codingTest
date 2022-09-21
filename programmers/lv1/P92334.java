@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-class Solution {
+class Solution92334 {
 
     public int[] solution(String[] id_list, String[] reportDup, int k) {
         int[] answer = new int[id_list.length];
@@ -64,7 +64,7 @@ public class P92334 {
 
     public static void main(String[] args) {
 
-        Solution solution = new Solution();
+        Solution92334 solution = new Solution92334();
 
         int[] answer = solution.solution(
                 new String[] { "muzi", "frodo", "apeach", "neo" },
