@@ -2,7 +2,7 @@ package programmers.lv1;
 
 import java.util.HashMap;
 
-class Solution {
+class Solution118666 {
     public String solution(String[] survey, int[] choices) {
 
         String[][] type = new String[][] {
@@ -62,7 +62,7 @@ class Solution {
 public class P118666 {
     public static void main(String[] args) {
 
-        Solution solution = new Solution();
+        Solution118666 solution = new Solution118666();
 
         String answer = solution.solution(new String[] { "AN", "CF", "MJ", "RT", "NA" }, new int[] { 5, 3, 2, 7, 5 });
 
