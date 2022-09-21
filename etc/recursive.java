@@ -12,22 +12,27 @@ public class recursive {
         int[] result = new int[arr.length];
 
         // 중복되지 않는 같은 길이의 모든 조합(swap) (경우의 수 : !n개)
-        // example.getAllCases_swap(arr, 0);
+        System.out.println("중복되지 않는 같은 길이의 모든 조합(swap)");
+        example.getAllCases_swap(arr, 0);
 
         // 중복되지 않는 같은 길이의 모든 조합(visit)
-        // example.getAllCases_visit(arr, result, visit, 0);
+        System.out.println("중복되지 않는 같은 길이의 모든 조합(visit)");
+        example.getAllCases_visit(arr, result, visit, 0);
 
         // 같은 길이의 모든 조합 (중복을 포함)
-        // example.getAllCases_dup(arr, result, 0);
+        System.out.println("같은 길이의 모든 조합 (중복을 포함)");
+        example.getAllCases_dup(arr, result, 0);
 
         // 모든 길이의 모든 조합 (중복되지않음)
+        System.out.println("모든 길이의 모든 조합 (중복되지않음)");
         for (int i = 1; i <= arr.length; i++) {
-            // example.getAllCases_variableLength(arr, result, visit, 0, i);
+            example.getAllCases_variableLength(arr, result, visit, 0, i);
         }
 
         // 모든 길이의 모든 조합 (중복가능)
+        System.out.println("모든 길이의 모든 조합 (중복가능)");
         for (int i = 1; i <= arr.length; i++) {
-            // example.getAllCases_dup_variableLength(arr, result, 0, i);
+            example.getAllCases_dup_variableLength(arr, result, 0, i);
         }
     }
 
