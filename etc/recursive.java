@@ -1,6 +1,8 @@
 package etc;
 import java.util.Arrays;
 
+// 재귀로 구횬하는 조합들
+
 public class recursive {
     public static void main(String[] args) {
 
