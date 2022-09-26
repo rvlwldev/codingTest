@@ -2,11 +2,12 @@ package etc;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class DFS {
     // 깊이 우선 탐색 (Depth First Search)
     // 넓게 보기 전에 끝까지 파고 들어가봄
-    // 단점 : 해가 없는 경우에 빠져 시간이 많이 소요될수 있음 
+    // 단점 : 해가 없는 경우에 빠져 시간이 많이 소요될수 있음
 
     // 인접한 노드를 모두 방문하면서 하나의 노드를 방문하고 넘어갈때,
     // 더 이상 방문할 노드가 없을때까지 인접한 노드를 방문한다.
@@ -22,16 +23,38 @@ public class DFS {
         node1.addNode();
         node1.addNode();
 
-        // 방문할 노드의 목록
+        // 방문된 1차원 노드의 목록
         boolean[] visit = new boolean[node1.size()];
         Arrays.fill(visit, false);
 
         // DFS Example
-        example(node1, 0, visit, new int[node1.size()]);
+        // System.out.println("1, 2, 3 의 노드를 DFS로 순환 시 경우의 수");
+        // example01(node1, 0, visit, new int[node1.size()]);
+        // System.out.println();
+
+        // 8개의 노드와 각각의 노드가 연결된 노드의 정보를 담은 2차원 배열 (ASC 정렬)
+        int[][] graph = new int[][] {
+                {}, // 노드가 1부터 시작하기 때문에 인덱스와 맞추기위해 0번 인덱스는 제외
+                { 2, 3, 8 },
+                { 1, 7 },
+                { 1, 4, 5 },
+                { 3, 5 },
+                { 3, 4 },
+                { 7 },
+                { 2, 6, 8 },
+                { 1, 7 } };
+
+        // 방문된 1차원 노드의 목록
+        visit = new boolean[graph.length];
+        Arrays.fill(visit, false);
+
+        // 1 -> 2 -> 7 -> 6 -> 8 -> 3 -> 4 -> 5
+        System.out.println("8개의 노드와 각각의 노드가 연결된 노드의 정보를 담은 2차원 배열로\n노드를 탐색할 경우");
+        example02(graph, 1, visit, new ArrayList<>());
 
     }
 
-    static void example(Node node, int depth, boolean[] visit, int[] result) {
+    static void example01(Node node, int depth, boolean[] visit, int[] result) {
 
         // 존재하는 모든 노드의 갯수를 넘으면 종료
         if (node.size() == depth) {
@@ -54,11 +77,30 @@ public class DFS {
 
             // 재귀 시작
             // 현재의 정보와 depth + 1 로 탐색의 순서를 진행시킴
-            example(node, depth + 1, visit, result);
+            example01(node, depth + 1, visit, result);
 
             // 반복문에서 depth의 들어갈수있는 노드의 모든 경우의 수를 위해서 다시 원복
             visit[i] = false;
         }
+    }
+
+    static void example02(int[][] graph, int start, boolean[] visit, ArrayList<Integer> result) {
+        // 현재 노드 방문처리
+        visit[start] = true;
+        
+        // 탐색순서결과에 현재 노드를 추가
+        result.add(start);
+        System.out.println("(example02) 현재 탐색 순서 : " + result);
+        
+        // 현재 노드와 인접한 노드들을 확인한다.
+        for (int node : graph[start]) {
+            // 방문되지 않았다면 재귀로 인접한 노드를 대상으로 확인한다.
+            if (!visit[node]) {
+                example02(graph, node, visit, result);
+            }
+        }
+
+
     }
 }
 
