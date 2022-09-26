@@ -4,6 +4,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
+// 노드 클래스 생성
+class Node {
+
+    private ArrayList<Integer> nodeList = new ArrayList<>();
+
+    void addNode() {
+        this.nodeList.add(nodeList.size() + 1);
+    }
+
+    int getNode(int n) {
+        return nodeList.get(n);
+    }
+
+    int size() {
+        return nodeList.size();
+    }
+
+    void print() {
+        System.out.println();
+
+        System.out.println(this.nodeList);
+
+        System.out.println();
+    }
+
+}
+
 public class DFS {
     // 깊이 우선 탐색 (Depth First Search)
     // 넓게 보기 전에 끝까지 파고 들어가봄
@@ -51,12 +78,11 @@ public class DFS {
         // 1 -> 2 -> 7 -> 6 -> 8 -> 3 -> 4 -> 5
         System.out.println("8개의 노드와 각각의 노드가 연결된 노드의 정보를 담은 2차원 배열로\n노드를 탐색할 경우");
         example02(graph, 1, visit, new ArrayList<>());
-
         System.out.println();
+
         System.out.println("8개의 노드와 각각의 노드가 연결된 노드의 정보를 담은 2차원 배열로\n스택을 이용해 노드를 탐색할 경우");
         Arrays.fill(visit, false);
         example03(graph, 1, visit);
-
     }
 
     static void example01(Node node, int depth, boolean[] visit, int[] result) {
@@ -144,31 +170,4 @@ public class DFS {
             }
         }
     }
-}
-
-// 노드 클래스 생성
-class Node {
-
-    private ArrayList<Integer> nodeList = new ArrayList<>();
-
-    void addNode() {
-        this.nodeList.add(nodeList.size() + 1);
-    }
-
-    int getNode(int n) {
-        return nodeList.get(n);
-    }
-
-    int size() {
-        return nodeList.size();
-    }
-
-    void print() {
-        System.out.println();
-
-        System.out.println(this.nodeList);
-
-        System.out.println();
-    }
-
 }
