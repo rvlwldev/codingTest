@@ -28,9 +28,9 @@ public class DFS {
         Arrays.fill(visit, false);
 
         // DFS Example
-        // System.out.println("1, 2, 3 의 노드를 DFS로 순환 시 경우의 수");
-        // example01(node1, 0, visit, new int[node1.size()]);
-        // System.out.println();
+        System.out.println("1, 2, 3 의 노드를 DFS로 순환 시 경우의 수");
+        example01(node1, 0, visit, new int[node1.size()]);
+        System.out.println();
 
         // 8개의 노드와 각각의 노드가 연결된 노드의 정보를 담은 2차원 배열 (ASC 정렬)
         int[][] graph = new int[][] {
@@ -51,6 +51,11 @@ public class DFS {
         // 1 -> 2 -> 7 -> 6 -> 8 -> 3 -> 4 -> 5
         System.out.println("8개의 노드와 각각의 노드가 연결된 노드의 정보를 담은 2차원 배열로\n노드를 탐색할 경우");
         example02(graph, 1, visit, new ArrayList<>());
+
+        System.out.println();
+        System.out.println("8개의 노드와 각각의 노드가 연결된 노드의 정보를 담은 2차원 배열로\n스택을 이용해 노드를 탐색할 경우");
+        Arrays.fill(visit, false);
+        example03(graph, 1, visit);
 
     }
 
@@ -87,11 +92,11 @@ public class DFS {
     static void example02(int[][] graph, int start, boolean[] visit, ArrayList<Integer> result) {
         // 현재 노드 방문처리
         visit[start] = true;
-        
+
         // 탐색순서결과에 현재 노드를 추가
         result.add(start);
         System.out.println("(example02) 현재 탐색 순서 : " + result);
-        
+
         // 현재 노드와 인접한 노드들을 확인한다.
         for (int node : graph[start]) {
             // 방문되지 않았다면 재귀로 인접한 노드를 대상으로 확인한다.
@@ -100,7 +105,44 @@ public class DFS {
             }
         }
 
+    }
 
+    static void example03(int[][] graph, int start, boolean[] visit) {
+
+        // 스택 생성 (스택은 후입 선출)
+        Stack<Integer> stack = new Stack<>();
+
+        // 스택에 현재 노드의 인접 노드들을 추가해준다.
+        for (int node : graph[start]) {
+            stack.push(node);
+        }
+        System.out.println();
+        System.out.println("현재 확인 노드 : " + start + "  남은 스택 목록 : " + stack);
+
+        // 인접한 노드가 추가되지 않을때까지 반복
+        while (!stack.empty()) {
+
+            // 현재 노드 (후입 선출)
+            int now = stack.pop();
+
+            System.out.println("현재 확인 노드 : " + now + "  남은 스택 목록 : " + stack);
+
+            // 방문하지 않은 노드라면
+            if (!visit[now]) {
+                // 방문하지 않은 노드의 인접노드들을 체크함
+                System.out.print("추가 되는 노드 목록 : ");
+                for (int i : graph[now]) {
+                    // 인접한 노드도 방문하지 않았다면
+                    if (!visit[i]) {
+                        stack.push(i); // 인접한 노드로 추가
+                        System.out.print(i + " ");
+
+                        visit[i] = true; // 방문 처리
+                    }
+                }
+                System.out.println();
+            }
+        }
     }
 }
 
