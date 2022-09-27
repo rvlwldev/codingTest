@@ -36,6 +36,7 @@ public class BFS {
         ArrayList<Integer> searchOrder = new ArrayList<>();
 
         // 첫번쨰 시작 노드를 가지고 있어야한다.
+        // 즉 첫번째 탐색 노드가 정해져 있다.
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(1);
         searchOrder.add(1);
@@ -48,6 +49,8 @@ public class BFS {
             int currentNode = queue.poll();
 
             for (int node : graph[currentNode]) {
+
+                // 방문한 노드라면 넘어감
                 if (visit[node]) {
                     continue;
                 }
@@ -55,7 +58,7 @@ public class BFS {
                 queue.offer(node);
                 searchOrder.add(node);
 
-                visit[node] = true;
+                visit[node] = true; // 방문처리
             }
 
         }
