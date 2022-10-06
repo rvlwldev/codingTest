@@ -3,6 +3,8 @@ package programmers.lv3;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// 너무 어렵게 생각해서 시간이 오래 걸렸음...
+// 그냥 두배로 만들면 됐는데....
 class Solution87694_while {
 
     public int solution(int[][] rectangle, int characterX, int characterY, int itemX, int itemY) {
