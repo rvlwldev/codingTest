@@ -3,7 +3,7 @@ package programmers.lv3;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class Solution87694 {
+class Solution87694_while {
 
     public int solution(int[][] rectangle, int characterX, int characterY, int itemX, int itemY) {
         int answer = 0;
@@ -19,11 +19,17 @@ class Solution87694 {
         // 3. 위는 2배 크게 만든다
         graph = createGraph(rectangle, graph);
 
-        graph[itemY * 2][itemX * 2] = 7;
-        graph[characterY * 2][characterX * 2] = 3;
+        // 2배 크게 만들었기 때문에
+        characterX *= 2;
+        characterY *= 2;
+        itemX *= 2;
+        itemY *= 2;
+
+        graph[itemY][itemX] = 7;
+        graph[characterY][characterX] = 3;
 
         Queue<int[]> q = new LinkedList<>();
-        q.offer(new int[] { characterY * 2, characterX * 2, 0 }); // 현재 캐릭터 위치
+        q.offer(new int[] { characterY, characterX, 0 }); // 현재 캐릭터 위치
 
         int[] yList = new int[] { 1, -1, 0, 0 };
         int[] xList = new int[] { 0, 0, 1, -1 };
@@ -33,7 +39,7 @@ class Solution87694 {
 
             int[] info = q.poll();
 
-            int y = info[0]; 
+            int y = info[0];
             int x = info[1];
             int c = info[2]; // 현재 진행한 길 카운트
 
@@ -41,12 +47,12 @@ class Solution87694 {
 
                 // 아이템 주으면
                 if (graph[y + yList[i]][x + xList[i]] == 7) {
-                    return (c + 1) / 2; // 아이템으로 위치 이동후 / 2
+                    return (c + 1) / 2; // 아이템으로 위치 이동하니까 +1 , 두배 늘려서 계산했으니 / 2
                 }
 
                 if (graph[y + yList[i]][x + xList[i]] == 1) {
                     graph[y + yList[i]][x + xList[i]] = 0; // 이미 지나온길은 다시 갈수 없음
-                    q.offer(new int[] { y + yList[i], x + xList[i], c + 1 }); 
+                    q.offer(new int[] { y + yList[i], x + xList[i], c + 1 });
                 }
             }
 
@@ -96,10 +102,10 @@ class Solution87694 {
 
 }
 
-public class P87694 {
+public class P87694_while {
     public static void main(String[] args) {
 
-        Solution87694 sol = new Solution87694();
+        Solution87694_while sol = new Solution87694_while();
 
         int[][] rectangle = new int[][] {};
 
