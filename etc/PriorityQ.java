@@ -1,6 +1,5 @@
 package etc;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -12,7 +11,7 @@ public class PriorityQ {
         PriorityQueue<Integer> priorityQueueASC = new PriorityQueue<>();
 
         // (우선순위가 높은 숫자 순)
-        PriorityQueue<Integer> priorityQueueDESC = new PriorityQueue<>(Collections.reverseOrder());
+        // PriorityQueue<Integer> priorityQueueDESC = new PriorityQueue<>(Collections.reverseOrder());
 
         priorityQueueASC.add(3);
         priorityQueueASC.add(1);
