@@ -14,7 +14,7 @@ public class P134239 {
 
         getCollatzOrders(k);
         getAccumulateSumOfCollatzNumbers();
-≠
+
         for (int[] range : ranges) {
             answer.add(getRangeWidthSum(range));
         }
