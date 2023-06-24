@@ -2,6 +2,8 @@ package etc;
 
 // 이분 탐색
 
+import java.util.Arrays;
+
 /*
 이분 탐색(Binary Search)은 결정 문제(Decision Problem)의 답이 이분적일 때 사용할 수 있는 탐색 기법이다.
 
@@ -22,16 +24,34 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         int target = 990;
+
+        // 초기화
+        // 배열이 정렬되어 있어야 이분탐색이 가능하다.
         int[] array = new int[10000];
+        for (int i = 0; i < 10000; i++) array[i] = i;
 
+        int low = 0;
+        int high = array.length - 1;
 
+        int count = 0;
+        while (low <= high) {
+            count++;
 
+            int mid = (low + high) / 2;
 
+            System.out.println(mid);
+            if (array[mid] == target) {
+                System.out.println(count + "번 만에 찾음\nmid : " + mid);
+                break;
+            }
+            // 중간값 보다 타겟이 작으면 왼쪽으로 탐색범위 이동
+            else if (array[mid] > target) high = mid - 1;
+            else low = mid + 1;
+
+            System.out.println("현재 범위 : " + low + " ~ " + high);
+        }
 
     }
-
-
-
 
 
 }
