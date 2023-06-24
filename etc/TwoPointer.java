@@ -16,8 +16,6 @@ public class TwoPointer {
         // start = 0, end = 0 으로 시작
         // 가장 작은 수열의 사이즈부터 찾는다.
         range.getSumOfSmallestRange();
-
-
     }
 
 }
@@ -83,20 +81,6 @@ class SumOfRange {
             }
         }
 
-    }
-
-
-    /* 가장 큰 범위의 합
-    위와 반대로 end 값을 마지막부터 탐색하면 된다.
-
-
-    */
-    public void getSumOfLongestRange() {
-        int target = 6; // 찾고자 하는 값
-        int[] arr = {1, 2, 3, 4, 3, 2, 1, 1, 2, 1, 4}; // 수열
-
-        int stt = 0;  // 시작 인덱스 포인터
-        int end = 0;  // 끝나는 인덱스 포인터
     }
 
 }
