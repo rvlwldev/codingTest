@@ -1,5 +1,7 @@
 package programmers.lv2;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Stack;
 
 public class P150369 {
@@ -7,14 +9,23 @@ public class P150369 {
         Solution sol = new Solution();
 
 //        System.out.println(sol.solution(4, 5, new int[]{1, 0, 3, 1, 2}, new int[]{0, 3, 0, 4, 0})); // 16
-//        System.out.println(sol.solution(2, 7, new int[]{1, 0, 2, 0, 1, 0, 2}, new int[]{0, 2, 0, 1, 0, 2, 0})); // 30
+        System.out.println(sol.solution1(4, 5, new int[]{1, 0, 3, 1, 2}, new int[]{0, 3, 0, 4, 0})); // 16
 
-        System.out.println(sol.solution(4, 2, new int[]{0, 0}, new int[]{0, 0}));
+//        System.out.println(sol.solution(2, 7, new int[]{1, 0, 2, 0, 1, 0, 2}, new int[]{0, 2, 0, 1, 0, 2, 0})); // 30
+        System.out.println(sol.solution1(2, 7, new int[]{1, 0, 2, 0, 1, 0, 2}, new int[]{0, 2, 0, 1, 0, 2, 0})); // 30
+
+//        System.out.println(sol.solution(4, 2, new int[]{0, 0}, new int[]{0, 0})); // 0
+        System.out.println(sol.solution1(4, 2, new int[]{0, 0}, new int[]{0, 0})); // 0
+
+
     }
 }
 
 class Solution {
+    // 스택
     public long solution(int cap, int n, int[] deliveries, int[] pickups) {
+        LocalDateTime start = LocalDateTime.now();
+
         long answer = 0;
 
         // 가장 먼곳부터 배달/수거를 한다.
@@ -41,10 +52,15 @@ class Solution {
             P = processCargos(P, cap);
         }
 
+        LocalDateTime end = LocalDateTime.now();
+
+        Duration diff = Duration.between(start.toLocalTime(), end.toLocalTime());
+        System.out.printf("스택사용 소요 나노초: %d", diff.getNano());
+
         return answer;
     }
 
-    private Stack<Integer> replaceEmptyCargo (Stack<Integer> stack) {
+    private Stack<Integer> replaceEmptyCargo(Stack<Integer> stack) {
         while (!stack.isEmpty() && stack.peek() < 1) stack.pop();
 
         return stack;
@@ -63,4 +79,56 @@ class Solution {
 
         return stack;
     }
+
+    // 포인터로 풀어보기
+    int Dp;
+    int Pp;
+
+    public long solution1(int cap, int n, int[] deliveries, int[] pickups) {
+        long answer = 0;
+
+        Dp = n - 1;
+        Pp = n - 1;
+
+        while (Dp >= 0 || Pp >= 0) {
+            while (Dp >= 0 && deliveries[Dp] == 0) Dp--;
+            while (Pp >= 0 && pickups[Pp] == 0) Pp--;
+
+            // 인덱스는 항상 -1 을 가지기 때문에 +1
+            answer += (Math.max(Dp, Pp) + 1) * 2L;
+
+            int sum = 0;
+
+            while (Dp >= 0 && sum < cap) {
+                sum += deliveries[Dp];
+                deliveries[Dp--] = 0; // 전체 반복문 시작 시 삭제 될 수 있게 0처리
+            }
+            // 최대 개수를 넘었을때, 남은 개수를 설정해주고 포인터 + 1
+            if (sum > cap) deliveries[++Dp] = sum - cap;
+
+            sum = 0;
+            while (Pp >= 0 && sum < cap) {
+                sum += pickups[Pp];
+                pickups[Pp--] = 0;
+            }
+            if (sum > cap) pickups[++Pp] = sum - cap;
+        }
+
+        return answer;
+    }
+
+    private int[] getLeftCargoCount(int pointer, int[] arr, int maxSize) {
+        int sum = 0;
+
+        while (pointer >= 0 && sum < maxSize) {
+            sum += arr[pointer];
+            arr[pointer--] = 0; // 전체 반복문 시작 시 삭제 될 수 있게 0처리
+        }
+        // 최대 개수를 넘었을때, 남은 개수를 설정해주고 포인터 + 1
+        if (sum > maxSize) arr[++pointer] = sum - maxSize;
+
+        return arr;
+    }
+
+
 }
