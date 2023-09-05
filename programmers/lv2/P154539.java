@@ -8,7 +8,7 @@ public class P154539 {
 
             for (int i = numbers.length - 2; i >= 0; i--) {
                 for (int j = i + 1; j < numbers.length; j++) {
-                    // 바로 뒤에 있는 수 비교
+                    // 바로 뒤에 있는 수 비교기
                     if(numbers[i] < numbers[j]) {
                         answer[i] = numbers[j];
                         break;
